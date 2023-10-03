@@ -3,15 +3,10 @@ const app = express();
 const port = 8000;
 
 //lista de tareas
-const tasks = [
-  { id: 1, 
-    isCompleted: false, 
-    description: "Aprender a manejar express" },
- 
-];
+
 
 //ruta para solicitar la lista en formato json
-app.get("/tasks", (_req, res) => {
+app.get("/tasks_list", (_req, res) => {
   res.json(tasks);
 });
 
