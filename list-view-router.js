@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const listViewRouter = express.Router();
 
-//definiendo ruta para listar tareas completadas
-listViewRouter.get('/completed', (_req, res) => {
-    //filtro para mostrar tareas completas
-    const completedTasks = tasks.filter(task => task.isCompleted);
-    res.json(completedTasks);
-})
+const verifyParams = require('./middlewares/validador');
+// const getCompletedTasks = require('./controllers/getCompleteTasks');
+// const getInCompletedTasks = require('./controllers/getInCompleteTasks');
+const getTasks = require('./controladores/traer_Tareas');
+
+listViewRouter.get('/tasks/:Completed',verifyParams, getTasks);
 
 module.exports = listViewRouter;

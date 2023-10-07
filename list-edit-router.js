@@ -1,21 +1,15 @@
 const express = require("express");
 const listEditRouter = express.Router();
 
-//ruta para crear nueva tarea
-listEditRouter.post('/create', (_req, res) => {
-    res.send('tarea creada exitosamente');
-});
+const handleInvalidRequest = require('./middlewares/manejador_error');
+const createTask = require('./controladores/creador_Tareas')
+const deleteTask = require('./controladores/borrar_Tareas')
+const updateTask = require('./controladores/actualizar_Tareas')
 
-//ruta para eliminar tarea
-listEditRouter.delete('/delete/:id', (_req, res) => {
-    const taskId = parseInt(req.params.id);
-    res.send(`se elimino la tarea ${taskId}`);
-});
+listEditRouter.post('/creador_Tareas', handleInvalidRequest, createTask);
 
-//ruta para actualizar una tarea
-listEditRouter.put('/update/:id', (_req, res) => {
-    const taskId = parseInt(req.params.id);
-    res.send(`se actualizo es estatus de la tarea ${taskId} `);
-});
+listEditRouter.delete('/borrar_Tareas/:id', deleteTask);
+
+listEditRouter.put('/actualizar_Tareas/:id', handleInvalidRequest, updateTask);
 
 module.exports = listEditRouter;
